@@ -1,0 +1,2 @@
+all:
+	g++ main.cpp `pkg-config --libs --cflags tesseract lept opencv` -o tess
