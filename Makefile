@@ -50,8 +50,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = Application.cpp \
-		MainWindow.cpp moc_MainWindow.cpp
+SOURCES       = src/Application.cpp \
+		src/MainWindow.cpp moc_MainWindow.cpp
 OBJECTS       = Application.o \
 		MainWindow.o \
 		moc_MainWindow.o
@@ -141,9 +141,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		tesseract.pro MainWindow.hpp \
-		Recognition.hpp Application.cpp \
-		MainWindow.cpp
+		tesseract.pro src/MainWindow.hpp \
+		src/Recognition.hpp src/Application.cpp \
+		src/MainWindow.cpp
 QMAKE_TARGET  = tesseract
 DESTDIR       = 
 TARGET        = tesseract
@@ -351,8 +351,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents MainWindow.hpp Recognition.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents Application.cpp MainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/MainWindow.hpp src/Recognition.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/Application.cpp src/MainWindow.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -387,11 +387,11 @@ moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: moc_MainWindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_MainWindow.cpp
-moc_MainWindow.cpp: Recognition.hpp \
-		MainWindow.hpp \
+moc_MainWindow.cpp: src/Recognition.hpp \
+		src/MainWindow.hpp \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/luca/Modelli/tesseract/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/luca/Modelli/tesseract -I/home/luca/Modelli/tesseract -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include MainWindow.hpp -o moc_MainWindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/luca/Modelli/tesseract/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/luca/Modelli/tesseract -I/home/luca/Modelli/tesseract -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/MainWindow.hpp -o moc_MainWindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -409,13 +409,13 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-Application.o: Application.cpp MainWindow.hpp \
-		Recognition.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Application.o Application.cpp
+Application.o: src/Application.cpp src/MainWindow.hpp \
+		src/Recognition.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Application.o src/Application.cpp
 
-MainWindow.o: MainWindow.cpp MainWindow.hpp \
-		Recognition.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
+MainWindow.o: src/MainWindow.cpp src/MainWindow.hpp \
+		src/Recognition.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o src/MainWindow.cpp
 
 moc_MainWindow.o: moc_MainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindow.o moc_MainWindow.cpp
