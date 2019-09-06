@@ -40,7 +40,7 @@ MainWindowTess::MainWindowTess() : imageLabel(new QLabel),
     scrollArea->setAlignment(Qt::AlignCenter);
     scrollArea->setVisible(true);
 
-    textEditor->setFont(QFont("Arial", 24, 2));
+    textEditor->setFont(QFont("Arial", 18, 2));
     textWidget->setWidget(textEditor);
 
     textWidget->setMinimumSize(QGuiApplication::primaryScreen()->availableSize() * 1 / 5);
