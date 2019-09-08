@@ -52,6 +52,19 @@ MainWindowTess::MainWindowTess() : imageLabel(new QLabel),
     setAcceptDrops(true);
 
     resize(QGuiApplication::primaryScreen()->availableSize());
+
+#ifdef DOCKER_DEBUG
+    // When user drops the image, we load it as a pixmap and activate actions
+    QPixmap pixmap = QPixmap("./tests/image.jpg");
+    imageLabel->setPixmap(pixmap);
+    imageLoaded = true;
+
+    normalSize();
+    zoomInAct->setEnabled(true);
+    zoomOutAct->setEnabled(true);
+    fitToWindowAct->setEnabled(true);
+    normalSizeAct->setEnabled(true);
+#endif
 }
 
 MainWindowTess::~MainWindowTess()
